@@ -11,17 +11,26 @@ const App = () => {
   ]
    
   const [selected, setSelected] = useState(0)
+  const [voteArray, setVote] = useState(Array(6).fill(0))
 
-  const clickHandler = () => {
+  const newHandler = () => {
     let selector = Math.floor(Math.random() * 6)
     setSelected(selector)
+  }
+
+  const voteHandler = () => {
+    let voteCopy = [...voteArray]
+    voteCopy[selected] += 1
+    setVote(voteCopy)
   }
 
   return (
     <div>
       {anecdotes[selected]}
       <div>
-        <button onClick={clickHandler}>new quote</button>
+        <p>has {voteArray[selected]} votes</p>
+        <button onClick={voteHandler}>vote for quote</button>
+        <button onClick={newHandler}>new quote</button>
       </div>
     </div>
   )
