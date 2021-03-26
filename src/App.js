@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 
 const Display = ({text, value}) => <p>{text} {value}</p>
-const Average = ({good, bad}) => {
-  let scoreavg = (good - bad)/(good + bad)
+const Statistics = ({good, bad, neutral}) => {
+  let average = (good - bad)/(good + bad + neutral)
+  let positivepercent = (good/(good + bad + neutral)) * 100
+
   return (
-    <p>Average {scoreavg}</p>
-  )
-}
-const Percentage = ({good, bad, neutral}) => {
-  let percent = (good/(good + bad + neutral)) * 100
-  return (
-    <p>Positive {percent}%</p>
+    <div>
+      <p>Average {average}</p>
+      <p>Positive {positivepercent}%</p>
+    </div>
   )
 }
 
@@ -36,8 +35,7 @@ const App = () => {
       <Display text={'good'} value={good}/>
       <Display text={'neutral'} value={neutral}/>
       <Display text={'bad'} value={bad}/>
-      <Average good={good} bad={bad}/>
-      <Percentage good={good} bad={bad} neutral={neutral}/>
+      <Statistics bad={bad} good={good} neutral={neutral}/>
 
     </div>
   )
