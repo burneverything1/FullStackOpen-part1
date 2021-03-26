@@ -1,7 +1,18 @@
 import React, { useState } from 'react'
 
-const Display = (props) => <p>{props.text} {props.value}</p>
-
+const Display = ({text, value}) => <p>{text} {value}</p>
+const Average = ({good, bad}) => {
+  let scoreavg = (good - bad)/(good + bad)
+  return (
+    <p>Average {scoreavg}</p>
+  )
+}
+const Percentage = ({good, bad, neutral}) => {
+  let percent = (good/(good + bad + neutral)) * 100
+  return (
+    <p>Positive {percent}%</p>
+  )
+}
 
 const App = () => {
   // save clicks of each button to its own state
@@ -25,6 +36,9 @@ const App = () => {
       <Display text={'good'} value={good}/>
       <Display text={'neutral'} value={neutral}/>
       <Display text={'bad'} value={bad}/>
+      <Average good={good} bad={bad}/>
+      <Percentage good={good} bad={bad} neutral={neutral}/>
+
     </div>
   )
 }
