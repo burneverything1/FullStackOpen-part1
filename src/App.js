@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 
-const Display = ({text, value}) => <p>{text} {value}</p>
 const Statistics = ({good, bad, neutral}) => {
   let average = (good - bad)/(good + bad + neutral)
   let positivepercent = (good/(good + bad + neutral)) * 100
 
+  if (good === 0 && bad === 0 && neutral === 0) {
+    return (
+      <p>No Feedback Given</p>
+    )
+  }
   return (
     <div>
+      <p>Good {good}</p>
+      <p>Neutral {neutral}</p>
+      <p>Bad {bad}</p>
       <p>Average {average}</p>
       <p>Positive {positivepercent}%</p>
     </div>
@@ -32,9 +39,6 @@ const App = () => {
         <button onClick={badHandler}>bad</button>
       </div>
       <h1>statistics</h1>
-      <Display text={'good'} value={good}/>
-      <Display text={'neutral'} value={neutral}/>
-      <Display text={'bad'} value={bad}/>
       <Statistics bad={bad} good={good} neutral={neutral}/>
 
     </div>
