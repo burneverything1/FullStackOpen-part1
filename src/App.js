@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
 
+const DisplayQuote = ({anecdote, votes}) => {
+  return (
+    <div>
+      {anecdote}
+      <p>Has {votes} Votes</p>
+    </div>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -24,13 +33,26 @@ const App = () => {
     setVote(voteCopy)
   }
 
+  let highVote = 0
+  let highQuote = null
+  for (let i = 0; i < voteArray.length; i++){
+    if (voteArray[i] > highVote) {
+      highQuote = i
+    }
+  }
+
   return (
     <div>
+      <h1>Anecdote of the Day</h1>
       {anecdotes[selected]}
       <div>
         <p>has {voteArray[selected]} votes</p>
         <button onClick={voteHandler}>vote for quote</button>
         <button onClick={newHandler}>new quote</button>
+      </div>
+      <div>
+        <h1>Anecdote with most Votes</h1>
+        <DisplayQuote anecdote={anecdotes[highQuote]} votes={voteArray[highQuote]}/>
       </div>
     </div>
   )
